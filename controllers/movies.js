@@ -9,11 +9,19 @@ module.exports.createMovie = (req, res, next) => {
     country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail,
   } = req.body;
   const owner = req.user._id;
-  // const movieId = req.movie._id;
 
   return Movie.create({
-    // eslint-disable-next-line max-len
-    country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, owner,
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    nameRU,
+    nameEN,
+    thumbnail,
+    owner,
   })
     .then((movie) => res.status(codes.SUCCESS_CREATED_CODE).send(movie))
     .catch((err) => {

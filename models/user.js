@@ -3,10 +3,6 @@ const isEmail = require('validator/lib/isEmail');
 const bcrypt = require('bcryptjs');
 const UnauthorizedError = require('../errors/unauthorized-error');
 
-// eslint-disable-next-line prefer-regex-literals
-// eslint-disable-next-line max-len
-// const urlPattern = new RegExp('^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w.-]+)+[\\w\\-._~:/?#[\\]@!$&\'()*+,;=.]+$');
-
 const userSchema = new mongoose.Schema(
   {
     name: {

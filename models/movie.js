@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const { ObjectId } = require('mongodb');
 
-// eslint-disable-next-line prefer-regex-literals
-const urlPattern = new RegExp('^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w.-]+)+[\\w\\-._~:/?#[\\]@!$&\'()*+,;=.]+$');
+const urlPattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/;
 
 const movieSchema = new mongoose.Schema(
   {
@@ -62,10 +61,6 @@ const movieSchema = new mongoose.Schema(
       type: ObjectId,
       required: true,
     },
-    // movieId: {
-    //   type: ObjectId,
-    //   // required: true,
-    // },
   },
   {
     versionKey: false,

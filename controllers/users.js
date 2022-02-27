@@ -93,7 +93,7 @@ module.exports.login = (req, res, next) => {
         maxAge: 3600000,
         httpOnly: true,
         sameSite: 'none',
-        // secure: true,
+        secure: true,
       }).send({
         name: user.name,
         email: user.email,
@@ -111,20 +111,8 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.logout = (req, res, next) => {
-  // try {
-  //   res.cookie('jwt', '', {
-  //     maxAge: -1,
-  //     httpOnly: true,
-  //     sameSite: true,
-  //     secure: true,
-  //   })
-  //     .send({ message: 'Вы вышли из профиля' });
-  // } catch (err) {
-  //   next(err);
-  // }
   try {
     res.clearCookie('token').send({ message: 'Вы вышли из профиля' });
-    // res.redirect("/")
   } catch (err) {
     next(err);
   }

@@ -8,7 +8,6 @@ const corsHandler = require('./middlewares/cors');
 const errorHandler = require('./middlewares/error-handler');
 const router = require('./routes');
 const { createUser, login, logout } = require('./controllers/users');
-// const { login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
