@@ -61,6 +61,10 @@ const movieSchema = new mongoose.Schema(
       type: ObjectId,
       required: true,
     },
+    movieId: {
+      type: Number,
+      required: true,
+    },
   },
   {
     versionKey: false,

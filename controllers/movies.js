@@ -6,7 +6,17 @@ const codes = require('../utils/const');
 
 module.exports.createMovie = (req, res, next) => {
   const {
-    country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail,
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    nameRU,
+    nameEN,
+    thumbnail,
+    movieId,
   } = req.body;
   const owner = req.user._id;
 
@@ -22,6 +32,7 @@ module.exports.createMovie = (req, res, next) => {
     nameEN,
     thumbnail,
     owner,
+    movieId,
   })
     .then((movie) => res.status(codes.SUCCESS_CREATED_CODE).send(movie))
     .catch((err) => {
@@ -53,11 +64,16 @@ module.exports.deleteMovie = (req, res, next) => {
       if (!movie.owner.equals(currentUser)) {
         throw new ForbiddenError('Вы не можете удалите фильм другого пользователя');
       }
-      return Movie.findByIdAndRemove(req.params._id).catch(next);
+      // return Movie.findByIdAndRemove(req.params._id).catch(next);
+      return movie.remove().then(() => {
+        res.status(codes.SUCCESS_OK_CODE).send({ data: movie });
+      }).catch((err) => {
+        next(err);
+      });
     })
-    .then((movie) => {
-      res.status(codes.SUCCESS_OK_CODE).send({ data: movie });
-    })
+  // .then((movie) => {
+  //   res.status(codes.SUCCESS_OK_CODE).send({ data: movie });
+  // })
     .catch((err) => {
       if (err.name === 'CastError') {
         next(

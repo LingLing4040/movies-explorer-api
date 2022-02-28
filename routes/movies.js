@@ -29,6 +29,7 @@ router.post('/movies', celebrate({
     image: Joi.string().required().custom(method),
     trailerLink: Joi.string().required().custom(method),
     thumbnail: Joi.string().required().custom(method),
+    movieId: Joi.number().required(),
   }),
 }), createMovie);
 router.delete('/movies/:_id', celebrate({

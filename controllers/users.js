@@ -32,7 +32,7 @@ module.exports.createUser = (req, res, next) => {
               .join(', ')}`,
           ),
         );
-      } else if (err.name === 'MongoServerError' && err.code === 11000) {
+      } else if (err.code === 11000) {
         next(
           new ConflictError('Такой email уже зарегистрирован'),
         );
@@ -78,6 +78,10 @@ module.exports.updateProfile = (req, res, next) => User.findByIdAndUpdate(
             .join(', ')}`,
         ),
       );
+    } else if (err.code === 11000) {
+      next(
+        new ConflictError('Такой email уже зарегистрирован'),
+      );
     } else {
       next(err);
     }
@@ -93,7 +97,7 @@ module.exports.login = (req, res, next) => {
         maxAge: 3600000,
         httpOnly: true,
         sameSite: 'none',
-        secure: true,
+        // secure: true,
       }).send({
         name: user.name,
         email: user.email,
