@@ -9,7 +9,7 @@ const errorHandler = require('./middlewares/error-handler');
 const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT, DB_ADDRESS } = process.env;
+const { PORT = 3000, DB_ADDRESS = 'mongodb://localhost:27017/moviesdb' } = process.env;
 
 const app = express();
 
